@@ -1,7 +1,14 @@
-// Cek NFC Support & Write something in NFC Tag
+// Cek NFC support
+let nfc = document.getElementById("nfc");
+if ("NDEFReader" in window) {
+  nfc.innerHTML = "NFC supported!";
+} else {
+  nfc.innerHTML = "NFC not supported!";
+}
+
+// Write something in NFC Tag
 async function writeNfc() {
   if ("NDEFReader" in window) {
-    let nfc = (document.getElementById("nfc").innerHTML = "NFC supported!");
     const ndef = new NDEFReader();
     let arr1 = ["Rangga", 21];
     try {
@@ -10,8 +17,6 @@ async function writeNfc() {
     } catch (error) {
       logData("Write NFC gagal!");
     }
-  } else {
-    nfc.innerHTML = "NFC tidak support!";
   }
 }
 
