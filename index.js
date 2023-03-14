@@ -15,6 +15,26 @@ function writeNfc() {
   }
 }
 
+// Scan dan tampilkan pesan dari NFC tag
+async function scanNfc() {
+  if ("NDEFReader" in window) {
+    const ndef = new NDEFReader();
+    try {
+      await ndef.scan();
+      ndef.onreading = async (event) => {
+        const decoder = new TextDecoder();
+        for (const record of event.message.records) {
+          logData("data : " + decoder.decode(record.data));
+        }
+      };
+    } catch (error) {
+      logData("Gagal scan NFC tag!");
+    }
+  } else {
+    logData("NFC tidak support!");
+  }
+}
+
 // Function untuk menampilkan log
 function logData(data) {
   let logElement = (document.getElementById("log").innerHTML = data);
