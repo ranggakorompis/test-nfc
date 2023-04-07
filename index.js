@@ -24,7 +24,7 @@ async function scanNfc() {
       ndef.onreading = async (event) => {
         const decoder = new TextDecoder();
         for (const record of event.message.records) {
-          logData("data : " + record.data);
+          logData("data : " + decoder.decode(record.data));
         }
       };
     } catch (error) {
