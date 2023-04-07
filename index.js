@@ -24,14 +24,14 @@ async function scanNfc() {
       ndef.onreading = async (event) => {
         const decoder = new TextDecoder();
         for (const record of event.message.records) {
-          logData("data : " + decoder.decode(record.data));
+          alert("data : " + decoder.decode(record.data));
         }
       };
     } catch (error) {
-      logData("Gagal scan NFC tag!");
+      alert("Gagal scan NFC tag!");
     }
   } else {
-    logData("NFC tidak support!");
+    alert("NFC tidak support!");
   }
 }
 
